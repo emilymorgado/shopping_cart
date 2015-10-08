@@ -81,18 +81,22 @@ def add_to_cart(id):
     When a melon is added to the cart, redirect browser to the shopping cart
     page and display a confirmation message: 'Successfully added to cart'.
     """
-    session['add_to_cart'] = melon_id   ##this is where we left off (Task 3: The Melon Cart Functionality)
-    if melon_id in session['add_to_cart']:
-        flash("That melon is already in your cart")
+    session[cart] = id   ##this is where we left off (Task 3: The Melon Cart Functionality)
+    if cart in session: 
+        session[cart].append(id)
+        flash("Your melon has been added")            
     else: 
-        session['add_to_cart'] = 1 
+        session[cart] = id 
+        return "Successfully added to your cart!"
+    return redirect("/cart")
+
     # TODO: Finish shopping cart functionality
 
     # The logic here should be something like:
     #
     # - add the id of the melon they bought to the cart in the session
 
-    return "Oops! This needs to be implemented!"
+    #return "Oops! This needs to be implemented!"
 
 
 @app.route("/login", methods=["GET"])
